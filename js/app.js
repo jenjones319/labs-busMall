@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
 'use strict'
-console.log('app.js is connected');
+console.log('app.js is connected')
 
 // HTML array
 
-var imageElements = document.getElementsByName('img');
+var imageElements = document.getElementsByTagName('img');
 
 var productIndex1 = 0;
 var productIndex2 = 0;
 var productIndex3 = 0;
 var totalClicks = 0;
 var rounds = 25;
-var allProducts = []
+var allProducts = [];
 
 // constructor function
 
@@ -27,119 +27,123 @@ function Product (name, imageUrl) {
 function getProductsArray (timesClicked) {
   var answer = [];
   for (var j = 0; j < allProducts.length; j++) {
-    answer[j] = allProducts[j][timesClicked];
+    answer[j] = allProducts[j][timesClicked]
   }
   console.log(answer);
-  return answer;
+  return answer
 }
 // busMall objects
 
-new Product('bag', 'images/bag.jpg');
-new Product('banana', 'images/banana.jpg');
-new Product('bathroom', 'images/bathroom.jpg');
-new Product('boots', 'images/boots.jpg');
-new Product('breakfast', 'images/breakfast.jpg');
-new Product('bubblegum', 'images/bubblegum.jpg');
-new Product('chair', 'images/chair.jpg');
-new Product('cthulhu', 'images/cthulhu.jpg');
-new Product('dog-duck', 'images/dog-duck.jpg');
-new Product('dragon', 'images/dragon.jpg');
-new Product('pen', 'images/pen.jpg');
-new Product('pet-sweep', 'images/pet-sweep');
-new Product('scissors', 'images/scissors.jpg');
-new Product('shark', 'images/shark.jpg');
-new Product('sweep', 'images/sweep.jpg');
-new Product('tauntaun', 'images/tauntaun.jpg');
-new Product('usb', 'images/usb.gif');
-new Product('water-can', 'images/water-can.jpg');
-new Product('wine-glass', 'images/wine-glass.jpg');
+var bag = new Product('bag', 'images/bag.jpg')
+var banana = new Product('banana', 'images/banana.jpg')
+var bathroom = new Product('bathroom', 'images/bathroom.jpg')
+var boots = new Product('boots', 'images/boots.jpg')
+var breakfast = new Product('breakfast', 'images/breakfast.jpg')
+var bubblegum = new Product('bubblegum', 'images/bubblegum.jpg')
+var chair = new Product('chair', 'images/chair.jpg')
+var cthulhu = new Product('cthulhu', 'images/cthulhu.jpg')
+var dogDuck = new Product('dog-duck', 'images/dog-duck.jpg')
+var dragon = new Product('dragon', 'images/dragon.jpg')
+var pen = new Product('pen', 'images/pen.jpg')
+var petSweep = new Product('pet-sweep', 'images/pet-sweep.jpg')
+var scissors = new Product('scissors', 'images/scissors.jpg')
+var shark = new Product('shark', 'images/shark.jpg')
+var sweep = new Product('sweep', 'images/sweep.png')
+var tauntaun = new Product('tauntaun', 'images/tauntaun.jpg')
+var usd = new Product('usb', 'images/usb.gif')
+var waterCan = new Product('water-can', 'images/water-can.jpg')
+var wineGlass = new Product('wine-glass', 'images/wine-glass.jpg')
 
-var totalClicks = 0;
 function imageWasClicked (event) {
-  totalClicks++;
+  totalClicks++
   if (event.srcElement.id === '1') {
-    allProducts[productIndex1].timesClicked++;
+    allProducts[productIndex1].timesClicked++
+    console.log('clicked1')
   } else if (event.srcElement.id === '2') {
-    allProducts[productIndex2].timesClicked++;
+    allProducts[productIndex2].timesClicked++
+    console.log('clicked2')
   } else if (event.srcElement.id === '3') {
-    allProducts[productIndex3].timesClicked++;
+    console.log('clicked3')
+    allProducts[productIndex3].timesClicked++
   }
 
   // ensure different images from one click to next
 
-  var nextProductIndex1 = Math.floor(Math.random()* allProducts.length);
-  while ((productIndex1 === nextProductIndex1) ||
-(nextProductIndex2 === nextProductIndex1)) {
-    nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
+  var nextProductIndex1 = Math.floor(Math.random() * allProducts.length)
+  while ((productIndex1 === nextProductIndex1) || (nextProductIndex2 === nextProductIndex1)) {
+    nextProductIndex1 = Math.floor(Math.random() * allProducts.length)
   }
 
-  var nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+  var nextProductIndex2 = Math.floor(Math.random() * allProducts.length)
   while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)) {
-    nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+    nextProductIndex2 = Math.floor(Math.random() * allProducts.length)
   }
 
-  var nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+  var nextProductIndex3 = Math.floor(Math.random() * allProducts.length)
   while ((nextProductIndex3 === productIndex3) || (nextProductIndex3 === nextProductIndex2)) {
-    nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+    nextProductIndex3 = Math.floor(Math.random() * allProducts.length)
   }
 
   // passing variable
-  productIndex1 = nextProductIndex1;
-  productIndex2 = nextProductIndex2;
-  productIndex3 = nextProductIndex3;
+  productIndex1 = nextProductIndex1
+  productIndex2 = nextProductIndex2
+  productIndex3 = nextProductIndex3
 
   // display a random picture, count times image shown, count times show for image in index1
 
-  imageElements[0].src = allProducts[productIndex1].imageUrl;
-  allProducts[productIndex1].timesShown++;
-  imageElements[1].src = allProducts[productIndex2].imageUrl;
-  allProducts[productIndex2].timesShown++;
-  imageElements[2].src = allProducts[productIndex3].imageUrl;
-  allProducts[productIndex3].timesShown++;
+  imageElements[0].src = allProducts[productIndex1].imageUrl
+  allProducts[productIndex1].timesShown++
+  imageElements[1].src = allProducts[productIndex2].imageUrl
+  allProducts[productIndex2].timesShown++
+  imageElements[2].src = allProducts[productIndex3].imageUrl
+  allProducts[productIndex3].timesShown++
 
   // calculate rounds
 
   if (totalClicks >= rounds) {
-    var footerElement = document.getElementsByTagName('footer')[0];
+    var footerElement = document.getElementsByTagName('footer')[0]
     if (footerElement.firstElementChild) {
-      footerElement.firstElementChild.remove();
+      footerElement.firstElementChild.remove()
     }
 
     // footer
 
-    footerElement.textContent = 'You voted on 3 nifty busMall products. Way to go!';
-    var asideUl = document.getElementById('voteResults');
+    footerElement.textContent = 'You voted on 3 nifty busMall products. Way to go!'
+    var asideUl = document.getElementById('voteResults')
 
     for (var x = 0; x < allProducts.length; x++) {
-      var voteResultListItem = document.createElement('li');
+      var voteResultListItem = document.createElement('li')
 
       // add template literal
 
-      voteResultListItem.textContent = '${allProducts[x].name} was clicked on ${allProducts[x].timesClicked} times and was shown ${allProducts[x].timesShown} times.';
-      asideUl.appendChild(voteResultListItem);
+      voteResultListItem.textContent = `${allProducts[x].name} was clicked on ${allProducts[x].timesClicked} times and was shown ${allProducts[x].timesShown} times.`
+      asideUl.appendChild(voteResultListItem)
 
-      var percentageListItem = document.createElement('li)');
+      var percentageListItem = document.createElement('li')
       if (allProducts[x].timesClicked === 0) {
-        var math = 'ZERO clicks and shown 
-        {allProducts.timesShown} times.';
+        var math = `ZERO clicks and shown ${allProducts[x].timesShown} times.`
       } else {
-        console.log(allProducts[x].timesShown);
-        math = Math.round(((allProducts[x].timesClicked / allProducts[x].timesShown).toFixed(2) * 100)) + '%';
+        console.log(allProducts[x].timesShown)
+        math = Math.round(((allProducts[x].timesClicked / allProducts[x].timesShown).toFixed(2) * 100)) + '%'
       }
 
-      percentageListItem.textContent = '${allProducts[x].name} percentage of clicked on VS times shown is ' + math;
+      percentageListItem.textContent = `${allProducts[x].name} percentage of clicked on VS times shown is ` + math
 
-      asideUl.appendChild(percentageListItem);
+      asideUl.appendChild(percentageListItem)
 
     }
 
-    //remove the add event listener
+    // remove the add event listener
 
     for (var i = 0; i < imageElements.length; i++) {
-      console.log('this is the event listener for the click image event.');
-      imageElements[i].removeEventListener('click', imageWasClicked);
+      console.log('this is the event listener for the click image event.')
+      imageElements[i].removeEventListener('click', imageWasClicked)
     }
 
-    runMyChartNow();
+  // runMyChartNow()
   }
+}
+for (var i = 0; i < imageElements.length; i++) {
+  console.log('this is the event listener for the click image event.')
+  imageElements[i].addEventListener('click', imageWasClicked)
 }
