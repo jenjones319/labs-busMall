@@ -1,38 +1,48 @@
+/* eslint-disable no-unused-vars */
 'use strict'
 console.log('app.js is connected');
 
-//Create a constructor function that creates an object associated with each product, and has the following properties:
-//Name of the product
-//File path of image
+// HTML array
 
 var imageElements = document.getElementsByName('img');
 
 var productIndex1 = 0;
 var productIndex2 = 0;
-var productImage3 = 0;
+var productIndex3 = 0;
 var totalClicks = 0;
 var rounds = 25;
 var allProducts = []
 
-function Product(name, imageUrl){
-    this.name = name
-    this.imageUrl = imageUrl
-    this.timesClicked = 0
-    allProducts.push(this);
+// constructor function
+
+function Product (name, imageUrl) {
+  this.name = name;
+  this.imageUrl = imageUrl;
+  this.timesClicked = 0;
+  this.timesShown = 0;
+  allProducts.push(this);
+}
+// chart render function
+
+function getProductsArray (timesClicked) {
+  var answer = [];
+  for (var j = 0; j < allProducts.length; j++) {
+    answer[j] = allProducts[j][timesClicked];
   }
-  
-new Product('bag', 'images/bag.jpg',);
+  console.log(answer);
+  return answer;
+}
+// busMall objects
+
+new Product('bag', 'images/bag.jpg');
 new Product('banana', 'images/banana.jpg');
 new Product('bathroom', 'images/bathroom.jpg');
 new Product('boots', 'images/boots.jpg');
 new Product('breakfast', 'images/breakfast.jpg');
-new Product('bathroom', 'images/bubblegum.jpg');
-new Product('boots', 'images/boots.jpg');
-new Product('breakfast', 'images/breakfast.jpg')
 new Product('bubblegum', 'images/bubblegum.jpg');
 new Product('chair', 'images/chair.jpg');
 new Product('cthulhu', 'images/cthulhu.jpg');
-new Product('dog-duck', 'images/dog-duck.jpg')
+new Product('dog-duck', 'images/dog-duck.jpg');
 new Product('dragon', 'images/dragon.jpg');
 new Product('pen', 'images/pen.jpg');
 new Product('pet-sweep', 'images/pet-sweep');
@@ -44,52 +54,92 @@ new Product('usb', 'images/usb.gif');
 new Product('water-can', 'images/water-can.jpg');
 new Product('wine-glass', 'images/wine-glass.jpg');
 
+var totalClicks = 0;
 function imageWasClicked (event) {
   totalClicks++;
   if (event.srcElement.id === '1') {
     allProducts[productIndex1].timesClicked++;
-} else if (event.srcElement.id === '2') {
+  } else if (event.srcElement.id === '2') {
     allProducts[productIndex2].timesClicked++;
+  } else if (event.srcElement.id === '3') {
+    allProducts[productIndex3].timesClicked++;
+  }
+
+  // ensure different images from one click to next
+
+  var nextProductIndex1 = Math.floor(Math.random()* allProducts.length);
+  while ((productIndex1 === nextProductIndex1) ||
+(nextProductIndex2 === nextProductIndex1)) {
+    nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
+  }
+
+  var nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+  while ((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)) {
+    nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+  }
+
+  var nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+  while ((nextProductIndex3 === productIndex3) || (nextProductIndex3 === nextProductIndex2)) {
+    nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+  }
+
+  // passing variable
+  productIndex1 = nextProductIndex1;
+  productIndex2 = nextProductIndex2;
+  productIndex3 = nextProductIndex3;
+
+  // display a random picture, count times image shown, count times show for image in index1
+
+  imageElements[0].src = allProducts[productIndex1].imageUrl;
+  allProducts[productIndex1].timesShown++;
+  imageElements[1].src = allProducts[productIndex2].imageUrl;
+  allProducts[productIndex2].timesShown++;
+  imageElements[2].src = allProducts[productIndex3].imageUrl;
+  allProducts[productIndex3].timesShown++;
+
+  // calculate rounds
+
+  if (totalClicks >= rounds) {
+    var footerElement = document.getElementsByTagName('footer')[0];
+    if (footerElement.firstElementChild) {
+      footerElement.firstElementChild.remove();
+    }
+
+    // footer
+
+    footerElement.textContent = 'You voted on 3 nifty busMall products. Way to go!';
+    var asideUl = document.getElementById('voteResults');
+
+    for (var x = 0; x < allProducts.length; x++) {
+      var voteResultListItem = document.createElement('li');
+
+      // add template literal
+
+      voteResultListItem.textContent = '${allProducts[x].name} was clicked on ${allProducts[x].timesClicked} times and was shown ${allProducts[x].timesShown} times.';
+      asideUl.appendChild(voteResultListItem);
+
+      var percentageListItem = document.createElement('li)');
+      if (allProducts[x].timesClicked === 0) {
+        var math = 'ZERO clicks and shown 
+        {allProducts.timesShown} times.';
+      } else {
+        console.log(allProducts[x].timesShown);
+        math = Math.round(((allProducts[x].timesClicked / allProducts[x].timesShown).toFixed(2) * 100)) + '%';
+      }
+
+      percentageListItem.textContent = '${allProducts[x].name} percentage of clicked on VS times shown is ' + math;
+
+      asideUl.appendChild(percentageListItem);
+
+    }
+
+    //remove the add event listener
+
+    for (var i = 0; i < imageElements.length; i++) {
+      console.log('this is the event listener for the click image event.');
+      imageElements[i].removeEventListener('click', imageWasClicked);
+    }
+
+    runMyChartNow();
   }
 }
-for (var i = 0; i < imageElements.length; i++) {
-
-  console.log('this is the event listener for the click image event.');
-  imageElements[i].addEventListener('click', imageWasClicked);
-}
-
-while((nextProductIndex2 === productIndex2) || (nextProductIndex2 === nextProductIndex1)){
-    
-}
-
-
-
-
-//Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
-
-
-
-
-
-
-
-
-//Attach an event listener to the section of the HTML page where the images are going to be displayed.
-
-
-
-//Once the users ‘clicks’ a product, generate three new products for the user to pick from.
-//As a user, I would like to track the selections made by viewers so that I can determine which products to keep for the catalog.
-//In the constructor function define a property to hold the number of times a product has been clicked.
-
-//After every selection by the viewer, update the newly added property to reflect if it was clicked.
-
-//As a user, I would like to control the number of rounds a user is presented with so that I can control the voting session duration.
-//By default, the user should be presented with 25 rounds of voting before ending the session. Done. 
-//Keep the number of rounds in a variable to allow the number to be easily changed for debugging and testing purposes. Done. 
-/*As a user, I would like to view a report of results after all rounds of voting have concluded so that I can evaluate which products were the most popular.
-Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered. 
-
-After voting rounds have been completed, remove the event listeners on the product.
-
-Display the list of all the products followed by the votes received and number of times seen for each. Example: Banana Slicer had 3 votes and was shown 5 times */
