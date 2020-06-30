@@ -4,40 +4,33 @@
         <title>BusMall</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css"
     </head>
+    <header>
+        <marquee style="font-size: 25px;"> Get on the busMall! </marquee>
+        <h1 id="click-h1">Vote for products you want to see...</h1>
+    </header>
     <body>
-
-        <marquee> Get on the busMall! </marquee>
-        <h1 id="click-h1">This is a title H1</h1>
-        <input id="change-text"/>
-
-        <input id="showPassword" value="password1234" type="password>"
-
     <main>
+    <aside>
+        <h2>Vote Results</h2>
+        <ul id='voteResults'></ul>
+    </aside>
 
+    <section>
         <img id="1" src="images/bag.jpg" />
         <img id="2" src="images/banana.jpg" />
         <img id="3" src="images/boots.jpg" />
-        <img id="4" src="images/breakfast.jpg" />
-        <img id="5" src="images/bubblegum.jpg" />
-        <img id="6" src="images/chair.jpg" />
-        <img id="7" src="images/cthulhu.jpg" />
-        <img id="8" src="images/dog-duck.jpg" />
-        <img id="9" src="images/dragon.jpg" />
-        <img id="10" src="images/pen.jpg" />
-        <img id="11" src="images/pet-sweep.jpg" />
-        <img id="12" src="images/scissors.jpg" />
-        <img id="13" src="images/shark.jpg" />
-        <img id="14" src="images/sweep.png" />
-        <img id="15" src="images/tauntaun.jpg" />
-        <img id="16" src="images/unicorn.jpg" />
-        <img id="17" src="images/usb.gif" />
-        <img id="18" src="images/water-can.jpg" />
-        <img id="19" src="images/wine-glass.jpg" />
+    </section>
 
-
-        
+    </main>
+    <footer>
+        <p>Cool people vote on the Unicorn Spam!</p>
+        <canvas id="resultsChart" width="400" height="400"</canvas>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script src="js/app.js"></script>
+        
     </body>
 </html>
