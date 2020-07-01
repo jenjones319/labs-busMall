@@ -124,6 +124,28 @@ function imageWasClicked (event) {
       percentageListItem.textContent = `${allProducts[x].name} percentage of clicked on VS times shown is ` + math;
       asideUl.appendChild(percentageListItem);
     }
+
+    // Step One
+    localStorage.setItem('savedProduct', JSON.stringify(allProducts)) ;
+
+    var asideUL = document.getElementById('voteResults');
+    for(var x = 0; x < allProducts.length; x++){
+      var voteResultListItem = document.createElement('li');
+      // adding a template literal to utilize the object properties.
+      voteResultListItem.textContent = `${allProducts[x].name} was clicked on ${allProducts[x].timesClicked} times and was shown ${allProducts[x].timesShown} times.`;
+      asideUl.appendChild(voteResultListItem);
+      //Add another li in the for loop for more data on the images being clicked.
+      var percentageListItem = document.createElement('li');
+      if(allProducts[x].timesClicked === 0){
+
+        var math = `ZERO clicks and shown ${allProducts[x].timesShown} times.`;
+      } else {
+        math = Math.round(((allProducts[x]['timesClicked'] / allProducts[x]['timesShown']).toFixed(2) * 100)) + '%';
+      }
+      percentageListItem.textContent = `${allProducts[x].name} percentage of clicked on VS times shown is ` + math;
+
+      asideUl.appendChild(percentageListItem);
+    }
     // remove the add event listener
     for (var i = 0; i < imageElements.length; i++) {
       console.log('this is the event listener for the click image event.');
@@ -177,14 +199,3 @@ for (var x = 0; x < imageElements.length; x++) {
   console.log('this is the event listener for the click image event.');
   imageElements[x].addEventListener('click', imageWasClicked);
 }
-
-
-
-
-
-
-
-
-
-
-
