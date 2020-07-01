@@ -58,7 +58,7 @@ function imageWasClicked (event) {
     // console.log('clicked3');
     allProducts[productIndex3].timesClicked++;
   }
-  // ensure different images from one click to next
+  /* ensure different images from one click to next
   var nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
   while ((productIndex1 === nextProductIndex1) || (nextProductIndex2 === nextProductIndex1)) {
     nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
@@ -70,7 +70,25 @@ function imageWasClicked (event) {
   var nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
   while ((nextProductIndex3 === productIndex3) || (nextProductIndex3 === nextProductIndex2)) {
     nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+  } */
+
+  // Get random image from array
+  var nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
+  var nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+  var nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+
+  while ((productIndex1 === nextProductIndex1) || (nextProductIndex2 === nextProductIndex1 || nextProductIndex3 === nextProductIndex1)){
+    nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
   }
+
+  while ((productIndex2 === nextProductIndex2) || (nextProductIndex3 === nextProductIndex2 || nextProductIndex1 === nextProductIndex2)){
+    nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+  }
+
+  while ((productIndex3 === nextProductIndex3) || (nextProductIndex1 === nextProductIndex3 || nextProductIndex2 === nextProductIndex3)){
+    nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+  }
+  
   // passing variable
   productIndex1 = nextProductIndex1;
   productIndex2 = nextProductIndex2;
