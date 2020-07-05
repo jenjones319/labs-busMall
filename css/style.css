@@ -1,6 +1,6 @@
 body {
-    color: coralgit ;
-    background-color: cornsilk;
+    color: white;
+    background-color: coral;
     font-family: sans-serif;
     font-size: 12pt;
     margin: 0px;
@@ -8,7 +8,7 @@ body {
 }
 
 aside {
-    background: cornsilk;
+    background: lightgreen;
     margin: 1px 0;
     padding: 1px 1px;
     border-radius: 3px;
